@@ -1,0 +1,872 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <meta name="copyright" content="OpenSim Ltd.">
+  <meta NAME="Author" CONTENT="Andras Varga">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <link rel="STYLESHEET" href="../book.css"  type="text/css">
+  <title>OMNeT++ - Manual</title>
+</head>
+<body>
+
+<p><hr><b><a href="chap14.html">[Prev]</A>&nbsp;<a href="chap16.html">[Next]</A>&nbsp;<a href="toc.html#toc_15.">[TOC]</a>&nbsp;<a href="usman.html">[Chapters]</a></b><hr></p><h1><a name="sec457"/>15 Testing</h1>
+<a name="cha:testing"></a>
+
+<p><h2><a name="sec458"/>15.1 Overview</h2>
+
+<p><h3><a name="sec459"/>15.1.1 Verification, validation</h3>
+
+<p>Correctness of the simulation model is a primary concern of the developers
+and users of the model, because they want to obtain credible simulation
+results. Verification and validation are activities conducted during the
+development of a simulation model with the ultimate goal of producing an
+accurate and credible model.
+
+<p><ul>
+<li> <b>Verification</b> of a model is the process of confirming that it is
+    correctly implemented with respect to the conceptual model, that is, it
+    matches specifications and assumptions deemed acceptable for the given
+    purpose of application. During verification, the model is tested to find
+    and fix errors in the implementation of the model.
+<li> <b>Validation</b> checks the accuracy of the model's representation of
+    the real system. Model validation is defined to mean &#8220;substantiation that
+    a computerized model within its domain of applicability possesses a
+    satisfactory range of accuracy consistent with the intended application of
+    the model&#8221;. A model should be built for a specific purpose or set of
+    objectives and its validity determined for that purpose.
+</ul>
+
+<p>Of the two, verification is essentially a software engineering issue, so it
+can be assisted with tools used for software quality assurance, for example
+testing tools. Validation is not a software engineering issue.
+
+<p><h3><a name="sec460"/>15.1.2 Unit testing, regression testing</h3>
+
+<p>As mentioned above, software testing techniques can be of significant help
+during model verification. Testing can also help to ensure that
+a simulation model that once passed validation and verification will also
+remain correct for an extended period.
+
+<p>Software testing is an art on its own, with several techniques and
+methodologies. Here we'll only mention two types that are important for us,
+regression testing and unit testing.
+
+<p><ul>
+<li> <b>Regression testing</b> is a technique that seeks to uncover new
+    software bugs, or regressions, in existing areas of a system after changes
+    such as enhancements, patches or configuration changes, have been made to
+    them.
+<li> <b>Unit testing</b> is a method by which individual units of
+    source code are tested to determine if they are fit for use. In an
+    object-oriented environment, this is usually done at the class level.
+</ul>
+
+<p>The two may overlap; for example, unit tests are also useful for discovering
+regressions.
+
+<p>One way of performing regression testing on an OMNEST simulation model is
+to record the log produced during simulation, and compare it to a
+pre-recorded log. The drawback is that code refactoring may nontrivially
+change the log as well, making it impossible to compare to the pre-recorded
+one. Alternatively, one may just compare the result files or only certain
+simulation results and be free of the refactoring effects, but then certain
+regressions may escape the testing. This type of tradeoff seems to be
+typical for regression testing.
+
+<p>Unit testing of simulation models may be done on class level or module
+level. There are many open-source unit testing frameworks for C++, for
+example CppUnit, Boost Test, Google Test, UnitTest++, just to name a few.
+They are well suited for class-level testing. However, they are usually
+cumbersome to apply to testing modules due to the peculiarities of the
+domain (network simulation) and OMNEST.
+
+<p>A test in an <i>xUnit</i>-type testing framework (a collective name for
+CppUnit-style frameworks) operates with various assertions to test
+function return values and object states. This approach is difficult to
+apply to the testing of OMNEST modules that often operate in a complex
+environment (cannot be easily instantiated and operated in isolation),
+react to various events (messages, packets, signals, etc.), and have
+complex dynamic behavior and substantial internal state.
+
+<p>Later sections will introduce <tt>opp_test</tt>, a tool OMNEST provides
+for assisting various testing task; and summarize various testing methods
+useful for testing simulation models.
+
+<p>
+<h2><a name="sec461"/>15.2 The opp_test Tool</h2>
+
+<p><h3><a name="sec462"/>15.2.1 Introduction</h3>
+
+<p>This section documents the <tt>opp_test</tt>, a versatile tool that is
+helpful for various testing scenarios. <tt>opp_test</tt> can be used for
+various types of tests, including unit tests and regression tests. It was
+originally written for testing the OMNEST simulation kernel, but it is
+equally suited for testing functions, classes, modules, or whole
+simulations.
+
+<p><tt>opp_test</tt> is built around a simple concept: it lets you define
+simulations in a concise way, runs them, and checks that the output (result
+files, log, etc.) matches a predefined pattern or patterns. In many cases,
+this approach works better than inserting various assertions into the code
+(which is still also an option).
+
+<p>Each test is a single file, with the <tt>.test</tt> file extension. All NED
+code, C++ code, ini files and other data necessary to run the test case as
+well as the PASS criteria are packed together in the test file. Such
+self-contained tests are easier to handle, and also encourage authors to
+write tests that are compact and to the point.
+
+<p>Let us see a small test file, <tt>cMessage_properties_1.test</tt>:
+
+<pre class="filelisting">
+%description:
+Test the name and length properties of <a href="../api/classcPacket.html">cPacket</a>.
+
+%activity:
+<a href="../api/classcPacket.html">cPacket</a> *pk = new <a href="../api/classcPacket.html">cPacket</a>();
+pk-&gt;setName("ACK");
+pk-&gt;setByteLength(64);
+EV &lt;&lt; "name: " &lt;&lt; pk-&gt;getName() &lt;&lt; endl;
+EV &lt;&lt; "length: " &lt;&lt; pk-&gt;getByteLength() &lt;&lt; endl;
+delete pk;
+
+%contains: stdout
+name: ACK
+length: 64
+</pre>
+<p>
+What this test says is this: create a simulation with a simple module
+that has the above C++ code block as the body of the <tt>activity()</tt> method,
+and when run, it should print the text after the <tt>%contains</tt> line.
+
+<p>To run this test, we need a <i>control script</i>, for example
+<tt>runtest</tt> from the <tt>omnetpp/test/core</tt> directory. <tt>runtest</tt>
+itself relies on the <tt>opp_test</tt> tool.
+
+<p><ul class="note"><b>NOTE</b><br>
+The control script is not part of OMNEST because it is somewhat specific to
+the simulation model or framework being tested, but it is usually trivial
+to write. A later section will explain how write the control script.
+</ul>
+
+<p>The output will be similar to this one:
+
+<pre class="filelisting">
+$ ./runtest cMessage_properties_1.test
+opp_test: extracting files from *.test files into work...
+Creating Makefile in omnetpp/test/core/work...
+cMessage_properties_1/test.cc
+Creating executable: out/gcc-debug/work
+opp_test: running tests using work.exe...
+*** cMessage_properties_1.test: PASS
+========================================
+PASS: 1   FAIL: 0   UNRESOLVED: 0
+
+Results can be found in work/
+</pre>
+<p>
+This was a passing test. What would constitute a fail?
+
+<p><ul>
+<li> crash
+<li> simulation runtime error
+<li> nonzero exit code (a simulation runtime error is also detected by nonzero exit code)
+<li> the output doesn't match the expectation (there are several possibilities
+   for expressing what is expected: multiple match criteria, literal string vs regex,
+   positive vs negative match, matching against the standard output, standard error
+   or any file, etc.)
+</ul>
+
+<p>Normally, you run several tests together. The <tt>runtest</tt> script accepts
+several <tt>.test</tt> files on the command line, and when started without
+arguments, it defaults to <tt>*.test</tt>, all test files in the current
+directory. At the end of the run, the tool prints summary statistics
+(number of tests passed, failed, and being unresolved).
+
+<p>An example run from <tt>omnetpp/test/core</tt> (some lines were removed from
+the output, and one test was changed to show a failure):
+
+<pre class="filelisting">
+$ ./runtest <a href="../api/classcSimpleModule.html">cSimpleModule</a>-*.test
+opp_test: extracting files from *.test files into work...
+Creating Makefile.vc in omnetpp/test/core/work...
+[...]
+Creating executable: out/gcc-debug/work
+opp_test: running tests using work...
+*** cSimpleModule_activity_1.test: PASS
+*** cSimpleModule_activity_2.test: PASS
+[...]
+*** cSimpleModule_handleMessage_2.test: PASS
+*** cSimpleModule_initialize_1.test: PASS
+*** cSimpleModule_multistageinit_1.test: PASS
+*** cSimpleModule_ownershiptransfer_1.test: PASS
+*** cSimpleModule_recordScalar_1.test: PASS
+*** cSimpleModule_recordScalar_2.test: FAIL (test-1.sca fails %contains-regex(2) rule)
+expected pattern:
+&gt;&gt;&gt;&gt;run General-1-.*?
+scalar Test 	one 	24.2
+scalar Test 	two 	-1.5888&lt;&lt;&lt;&lt;
+actual output:
+&gt;&gt;&gt;&gt;version 2
+run General-1-20141020-11:39:34-1200
+attr configname General
+attr datetime 20141020-11:39:34
+attr experiment General
+attr inifile _defaults.ini
+[...]
+scalar Test 	one 	24.2
+scalar Test 	two 	-1.5
+&lt;&lt;&lt;&lt;
+*** cSimpleModule_recordScalar_3.test: PASS
+*** cSimpleModule_scheduleAt_notowner_1.test: PASS
+*** cSimpleModule_scheduleAt_notowner_2.test: PASS
+[...]
+========================================
+PASS: 36   FAIL: 1   UNRESOLVED: 0
+FAILED tests: cSimpleModule_recordScalar_2.test
+
+Results can be found in work/
+</pre>
+<p>
+Note that code from all tests were linked to form a single executable, which saves
+time and disk space compared to per-test executables or libraries.
+
+<p>A test file like the one above is useful for unit testing of classes or functions.
+However, as we will see, the test framework provides further facilities that make
+it convenient for testing modules and whole simulations as well.
+
+
+The following sections go into details about the syntax and features of <tt>.test</tt> files,
+about writing the control script, and give advice on how to cover several use
+cases with the <tt>opp_test</tt> tool.
+
+<p>
+<h3><a name="sec463"/>15.2.2 Terminology</h3>
+
+<p>The next sections will use the following language:
+
+<p><ul>
+<li> <i>test file</i>: A file with the <tt>.test</tt> extension that <tt>opp_test</tt> understands.
+<li> <i>test tool</i>: The <tt>opp_test</tt> program
+<li> <i>control script</i>: A script that relies on <tt>opp_test</tt> to run the tests.
+  The control script is not part of OMNEST because it usually needs to be somewhat
+  specific to the simulation model or framework being tested.
+<li> <i>test program</i>: The simulation program whose output is checked by the test.
+  It is usually <tt>work/work</tt> (<tt>work/work.exe</tt> on Windows). However, it is
+  also possible to let the control script build a dynamic library from the test code, and
+  then use e.g. <tt>opp_run</tt> as test program.
+<li> <i>test directory</i>: The directory where a <tt>.test</tt> file
+  is extracted; usually <tt>work/&lt;testname&gt;/</tt>. It is also set as working
+  directory for running the test program.
+</ul>
+
+<p>
+<h3><a name="sec464"/>15.2.3 Test file syntax</h3>
+
+<p>Test files are composed of %-directives of the syntax:
+
+<pre class="filelisting">
+%&lt;directive&gt;: &lt;value&gt;
+&lt;body&gt;
+</pre>
+<p>
+The body extends up to the next directive, that is, the next line starting with %.
+Some directives require a value, others a body, or both.
+
+<p>Certain directives, e.g. <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%contains<font color=maroon><em>  </em>  </font>, may occur several times in the file.
+
+<p><h3><a name="sec465"/>15.2.4 Test description</h3>
+
+<p>Syntax:
+<pre class="filelisting">
+%description:
+&lt;test-description-lines&gt;
+</pre>
+
+<p><font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%description<font color=maroon><em>  </em>  </font> is customarily written at the top of the <tt>.test</tt>
+file, and lets you provide a multi-line comment about the purpose of the
+test. It is recommended to invest time into well-written descriptions,
+because determining the original purpose of a test that has become broken
+can often be quite difficult without them.
+
+<p>
+<h3><a name="sec466"/>15.2.5 Test code generation</h3>
+
+<p>This section describes the ways you can create C++ source and other files
+into the test directory.
+
+<p><p class="subheading">%activity</p>
+
+<p>Syntax:
+
+<pre class="filelisting">
+%activity:
+&lt;body-of-activity()&gt;
+</pre>
+<p>
+<font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%activity<font color=maroon><em>  </em>  </font> lets you run test code without the need for much additional boilerplate.
+It generates a simple module that contains a single <tt>activity()</tt> method, and places
+your code into <tt>activity()</tt>.
+
+<p>A NED file containing the simple module's (barebones) declaration, and an
+ini file to set up the module as a network are also generated.
+
+<p>
+<p class="subheading">%module</p>
+
+<p>Syntax:
+
+<pre class="filelisting">
+%module: &lt;modulename&gt;
+&lt;simple-module-C++-definition&gt;
+</pre>
+<p>
+<font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%module<font color=maroon><em>  </em>  </font> lets you define a module class and run it as the only module
+in the simulation.
+
+<p>A NED file containing the simple module's (barebones) declaration, and an
+ini file to set up the module as a network are also generated.
+
+<p>
+<p class="subheading">%includes, %global</p>
+
+<p>Syntax:
+
+<pre class="filelisting">
+%includes:
+&lt;#include directives&gt;
+</pre>
+<p>
+<pre class="filelisting">
+%global:
+&lt;global-code-pasted-before-activity&gt;
+</pre>
+
+<p><font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%includes<font color=maroon><em>  </em>  </font> and <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%global<font color=maroon><em>  </em>  </font> are helpers for <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%activity<font color=maroon><em>  </em>  </font>
+and <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%module<font color=maroon><em>  </em>  </font>, to allow you to insert additional lines into the
+generated C++ code.
+
+<p>They both insert the code block above the module C++ declaration, the only
+difference is in their relation to the C++ namespace: <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%includes<font color=maroon><em>  </em>  </font> is
+inserted above (outside) the namespace, and <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%globals<font color=maroon><em>  </em>  </font> is inserted
+inside the namespace.
+
+<p>
+<p class="subheading">The default ini file</p>
+
+<p>The following ini file is always generated:
+
+<pre class="inifile">
+[General]
+network = &lt;network-name&gt;
+cmdenv-express-mode = false
+</pre>
+<p>
+The network name in the file is chosen to match the module
+generated with <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%activity<font color=maroon><em>  </em>  </font> or <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%module<font color=maroon><em>  </em>  </font>; if they
+are absent, it will be <tt>Test</tt>.
+
+<p><p class="subheading">%network</p>
+
+<p>Syntax:
+
+<pre class="filelisting">
+%network: &lt;network-name&gt;
+</pre>
+<p>
+This directive can be used to override the network name in the default ini file.
+
+<p>
+<p class="subheading">%file, %inifile</p>
+
+<p>Syntax:
+
+<pre class="filelisting">
+%file: &lt;file-name&gt;
+&lt;file-contents&gt;
+</pre>
+<p>
+<pre class="filelisting">
+%inifile: [&lt;inifile-name&gt;]
+&lt;inifile-contents&gt;
+</pre>
+
+<p><font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%file<font color=maroon><em>  </em>  </font> saves a file with the given file name and content into the test's
+extraction folder in the preparation phase of the test run. It is customarily
+used for creating NED files, MSG files, ini files, and extra data files
+required by the test. There can be several <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%file<font color=maroon><em>  </em>  </font> sections in the test file.
+
+<p><font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%inifile<font color=maroon><em>  </em>  </font> is similar to <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%file<font color=maroon><em>  </em>  </font> in that it also saves a file with the
+given file name and content, but it additionally also adds the file to the simulation's
+command line, causing the simulation to read it as an (extra) ini file.
+There can be several <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%inifile<font color=maroon><em>  </em>  </font> sections in the test file.
+
+<p>The default ini file is always generated.
+
+<p>
+<p class="subheading">The @TESTNAME@ macro</p>
+
+<p>In test files, the string <tt>@TESTNAME@</tt> will be replaced with the test
+case name. Since it is substituted everywhere (C++, NED, msg and ini
+files), you can also write things like <tt>@TESTNAME@_function()</tt>, or
+<tt>printf("this is @TESTNAME@\n")</tt>.
+
+<p><p class="subheading">Avoiding C++ name clashes</p>
+
+<p>Since all sources are compiled into a single test executable, actions have
+to be taken to prevent accidental name clashes between C++ symbols in
+different test cases. A good way to ensure this is place all code into
+namespaces named after the test cases.
+
+<pre class="filelisting">
+namespace @TESTNAME@ {
+   ...
+};
+</pre>
+<p>
+This is done automatically for the <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%activity<font color=maroon><em>  </em>  </font>, <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%module<font color=maroon><em>  </em>  </font>,
+<font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%global<font color=maroon><em>  </em>  </font> blocks, but for other files (e.g. source files generated
+via <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%file<font color=maroon><em>  </em>  </font>, that needs to be done manually.
+
+<p>
+<h3><a name="sec467"/>15.2.6 PASS criteria</h3>
+
+<p><p class="subheading">%contains, %contains-regex, %not-contains, %not-contains-regex</p>
+
+<p>Syntax:
+
+<pre class="filelisting">
+%contains: &lt;output-file-to-check&gt;
+&lt;multi-line-text&gt;
+</pre>
+<p>
+<pre class="filelisting">
+%contains-regex: &lt;output-file-to-check&gt;
+&lt;multi-line-regexp&gt;
+</pre>
+
+<pre class="filelisting">
+%not-contains: &lt;output-file-to-check&gt;
+&lt;multi-line-text&gt;
+</pre>
+<p>
+<pre class="filelisting">
+%not-contains-regex: &lt;output-file-to-check&gt;
+&lt;multi-line-regexp&gt;
+</pre>
+
+<p>These directives let you check for the presence (or absence) of certain text in
+the output. You can check a file, or the standard output or standard error of
+the test program; for the latter two you need to specify <tt>stdout</tt> or
+<tt>stderr</tt> as file name. If the file is not found, the test will be marked
+as <i>unresolved</i>. There can be several <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%contains<font color=maroon><em>  </em>  </font>-style directives
+in the test file.
+
+<p>The text or regular expression can be multi-line. Before match is attempted,
+trailing spaces are removed from all lines in both the pattern and the
+file contents; leading and trailing blank lines in the patterns are removed;
+and any substitutions are performed (see <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%subst<font color=maroon><em>  </em>  </font>). Perl-style regular
+expressions are accepted.
+
+<p>To facilitate debugging of tests, the text/regex blocks are saved into
+the test directory.
+
+<p>
+<p class="subheading">%subst</p>
+
+<p>Syntax:
+
+<pre class="filelisting">
+%subst: /&lt;search-regex&gt;/&lt;replacement&gt;/&lt;flags&gt;
+</pre>
+<p>
+It is possible to apply text substitutions to the output before it is
+matched against expected output. This is done with <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%subst<font color=maroon><em>  </em>  </font>
+directive; there can be more than one <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%subst<font color=maroon><em>  </em>  </font> in a test file. It
+takes a Perl-style regular expression to search for, a replacement text,
+and flags, in the <i>/search/replace/flags</i> syntax. Flags can be empty
+or a combination of the letters <tt>i</tt>, <tt>m</tt>, and <tt>s</tt>, for
+case-insensitive, multi-line or single-string match (see the Perl regex
+documentation.)
+
+<p><font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%subst<font color=maroon><em>  </em>  </font> was primarily invented to deal with differences in printf
+output across platforms and compilers: different compilers print infinite
+and not-a-number in different ways: <tt>1.#INF</tt>, <tt>inf</tt>, <tt>Inf</tt>,
+<tt>-1.#IND</tt>, <tt>nan</tt>, <tt>NaN</tt> etc. With <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%subst<font color=maroon><em>  </em>  </font>, they can be
+brought to a common form:
+
+<pre class="filelisting">
+%subst: /-?1\.#INF/inf/
+%subst: /-?1\.#IND/nan/
+%subst: /-?1\.#QNAN/nan/
+%subst: /-?NaN/nan/
+%subst: /-?nan/nan/
+</pre>
+<p>
+<p class="subheading">%exitcode, %ignore-exitcode</p>
+
+<p>Syntax:
+<pre class="filelisting">
+%exitcode: &lt;one-or-more-numeric-exit-codes&gt;
+</pre>
+
+<pre class="filelisting">
+%ignore-exitcode: 1
+</pre>
+<p>
+<font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%exitcode<font color=maroon><em>  </em>  </font> and <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%ignore-exitcode<font color=maroon><em>  </em>  </font> let you test the exit code of the
+test program. The former checks the exit code is one of the numbers specified in
+the directive; the other makes the test framework ignore the exit code.
+
+<p>OMNEST simulations exit with zero if the simulation terminated
+without an error, and some &gt;0 code if an runtime error occurred. Normally,
+a nonzero exit code makes the test fail. However, if the expected outcome
+is a runtime error (e.g. you want to test parameter validation code), you
+can use either <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%exitcode<font color=maroon><em>  </em>  </font> to express that, or specify <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%ignore-exitcode<font color=maroon><em>  </em>  </font>
+and test for the presence of the correct error message in the output.
+
+<p>
+
+<p><p class="subheading">%file-exists, %file-not-exists</p>
+
+<p>Syntax:
+
+<pre class="filelisting">
+%file-exists: &lt;filename&gt;
+</pre>
+<p>
+<pre class="filelisting">
+%file-not-exists: &lt;filename&gt;
+</pre>
+
+<p>These directives test for the presence or absence of a certain file in
+the test directory.
+
+<p><h3><a name="sec468"/>15.2.7 Extra processing steps</h3>
+
+<p><p class="subheading">%env, %extraargs, %testprog</p>
+
+<p>Syntax:
+
+<pre class="filelisting">
+%env: &lt;environment-variable-name&gt;=&lt;value&gt;
+</pre>
+<p>
+<pre class="filelisting">
+%extraargs: &lt;argument-list&gt;
+</pre>
+
+<pre class="filelisting">
+%testprog: &lt;executable&gt;
+</pre>
+<p>
+The <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%env<font color=maroon><em>  </em>  </font> directive lets you set an environment variable that will
+be defined when the test program and the potential pre- and post-processing
+commands run. There can be multiple <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%env<font color=maroon><em>  </em>  </font> directives in the test
+file.
+
+<p><font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%extraargs<font color=maroon><em>  </em>  </font> lets you add extra command-line arguments to the
+test program (usually the simulation) when it is run.
+
+<p>The <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%testprog<font color=maroon><em>  </em>  </font> directive lets you replace the test program.
+<font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%testprog<font color=maroon><em>  </em>  </font> also slightly alters the arguments the test program is
+run with. Normally, the test program is launched with the following command
+line:
+
+<pre class="filelisting">
+$ &lt;default-testprog&gt; -u Cmdenv &lt;test-extraargs&gt; &lt;global-extraargs&gt; &lt;inifiles&gt;
+</pre>
+<p>
+When <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%testprog<font color=maroon><em>  </em>  </font> is present, it becomes the following:
+
+<pre class="filelisting">
+$ &lt;custom-testprog&gt; &lt;test-extraargs&gt; &lt;global-extraargs&gt;
+</pre>
+<p>
+That is, <tt>-u Cmdenv</tt> and <tt>&lt;inifilenames&gt;</tt> are removed; this allows you to
+use programs that do not require or understand them, and places you in complete
+command of the arguments list.
+
+<p>Note that <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%extraargs<font color=maroon><em>  </em>  </font> and <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%testprog<font color=maroon><em>  </em>  </font> have an equivalent
+command-line option in <tt>opp_test</tt>. (In the text above,
+<tt>&lt;global-extraargs&gt;</tt> stands for extra args specified to
+<tt>opp_test</tt>.)  <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%env<font color=maroon><em>  </em>  </font> doesn't need an option in
+<tt>opp_test</tt>, because the test program inherits the environment
+variables from <tt>opp_test</tt>, so you can just set them in the control
+script, or in the shell you run the tests from.
+
+<p>
+<p class="subheading">%prerun-command, %postrun-command</p>
+
+<p>Syntax:
+
+<pre class="filelisting">
+%prerun-command: &lt;command&gt;
+</pre>
+<p>
+<pre class="filelisting">
+%postrun-command: &lt;command&gt;
+</pre>
+
+<p>These directives let you run extra commands before/after running the test
+program (i.e. the simulation). There can be multiple pre- and post-run
+commands. The post-run command is useful when the test outcome cannot be determined
+by simple text matching, but requires statistical evaluation or other processing.
+
+<p>If the command returns a nonzero exit code, the test framework will assume that
+it is due to a technical problem (as opposed to test failure), and count the
+test as <i>unresolved</i>. To make the test fail, let the command write a
+file, and match the file's contents using <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%contains<font color=maroon><em>  </em>  </font> &amp; co.
+
+<p>If the post-processing command is a short script, it is practical
+to add it into the <tt>.test</tt> file via the <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%file<font color=maroon><em>  </em>  </font> directive,
+and invoke it via its interpreter. For example:
+
+<pre class="filelisting">
+%postrun-command: python test.py
+%file: test.py
+&lt;Python script&gt;
+</pre>
+<p>
+Or:
+
+<pre class="filelisting">
+%postrun-command: R CMD BATCH test.R
+%file: test.R
+&lt;R script&gt;
+</pre>
+<p>
+If the script is very large or shared among several tests, it is more practical
+to place it into a separate file. The test command can find the script e.g.
+by relative path, or by referring to an environment variable that contains
+its location or full path.
+
+<p>
+<h3><a name="sec469"/>15.2.8 Unresolved</h3>
+
+<p>A test case is unresolved if the test program cannot be executed at all, the
+output cannot be read, or if the test case declares so. The latter is done
+by printing <tt>#UNRESOLVED</tt> or <tt>#UNRESOLVED:some-explanation</tt> on the
+standard output, at the beginning of the line.
+
+<p>
+<h3><a name="sec470"/>15.2.9 opp_test synopsys</h3>
+
+<p>Little has been said so far what <tt>opp_test</tt> actually does, or how you
+can invoke it.
+
+<p>It can be invoked in two modes: file generation and test running. When running
+a test suite, it will actually be run twice, once in file generation mode,
+then in test running mode.
+
+<p>File generation mode has the syntax <tt>opp_test gen <i>&lt;options&gt;
+&lt;testfiles&gt;</i></tt>. For example:
+
+<pre class="filelisting">
+$ opp_test gen *.test
+</pre>
+<p>
+This command will extract C++ and NED files, ini files, etc., from
+the <tt>.test</tt> files into separate files. All files will be created
+in a work directory (which defaults to <tt>./work/</tt>),
+and each test will have its own subdirectory under <tt>./work/</tt>.
+
+<p>The second mode, test running, is invoked as <tt>opp_test run <i>&lt;options&gt;
+&lt;testfiles&gt;</i></tt>. For example:
+
+<pre class="filelisting">
+$ opp_test run *.test
+</pre>
+<p>
+In this mode, <tt>opp_test</tt> will run the simulations, check the
+results, and report the number of passes and failures. The way of invoking
+simulations (which executable to run, the list of command-line arguments to
+pass, etc.) can be specified to <tt>opp_test</tt> via command-line options.
+
+<p><ul class="note"><b>NOTE</b><br>
+Run <tt>opp_test</tt> in your OMNEST installation to get the exact list of
+command-line options.
+</ul>
+
+<p>The simulation needs to have been built from source before <tt>opp_test
+run</tt> can be issued. Usually one would employ a command similar to
+
+<pre class="filelisting">
+$ cd work; opp_makemake --deep --no-deep-includes; make
+</pre>
+<p>
+to achieve that.
+
+<p><h3><a name="sec471"/>15.2.10 Writing the control script</h3>
+
+<p>Usually one writes a control script to automate the two invocations of <tt>opp_test</tt>
+and the build of the simmulation model between them.
+
+<p>A basic variant would look like this:
+
+<pre class="filelisting">
+#! /bin/sh
+opp_test gen -v *.test || exit 1
+(cd work; opp_makemake -f --deep --no-deep-includes; make) || exit 1
+opp_test run -v *.test
+</pre>
+<p>
+For any practical use, the test suite needs to refer to the codebase being
+tested. This means that the codebase must be added to the include path,
+must be linked with, and the NED files must be added to the NED path. The
+first two can be achieved by the appropriate parameterization of
+<tt>opp_makemake</tt>; the last one can be done by setting and exporting
+the <tt>NEDPATH</tt> environment variable in the control script.
+
+<p>For inspiration, check out <tt>runtest</tt> in the <tt>omnetpp/test/core</tt>
+directory, and a similar script used in the INET Framework.
+
+<p>
+<h2><a name="sec472"/>15.3 Implementing various types of tests</h2>
+
+<p><h3><a name="sec473"/>15.3.1 Smoke tests</h3>
+
+<p>Smoke tests are a tool for very basic verification and regression testing.
+Basically, the simulation is run for a while, and it must not crash or stop
+with a runtime error. Naturally, smoke test provide very low confidence in
+the model, but in turn they are very easy to implement.
+
+<p>Automation is important. The INET Framework contains a script that runs all
+or selected simulations defined in a CSV file (with columns like the working
+directory and the command to run), and reports the results. The script can
+be easily adapted to other models or model frameworks.
+
+<p>
+<h3><a name="sec474"/>15.3.2 Fingerprint tests</h3>
+
+<p>Fingerprint tests are a low-cost but effective tool for regression testing
+of simulation models. Fingerprint itself is a hash computed from various
+properties of simulation events as the simulation executes, and thus, the
+final fingerprint value is characteristic of the trajectory of the
+simulation. For regression testing, one just needs to compare the computed
+fingerprint to that from a reference run -- if they differ, the simulation
+trajectory has changed.
+
+<p>Fingerprint tests are very useful for ensuring that a change (refactoring,
+bugfix, or new feature) didn't break the simulation. The fingerprint
+computation algorithm was deliberately designed so that it is immune to
+&#8220;unimportant&#8221; changes (e.g. changes in the debug log messages), but
+signals if the behaviour of the model changes.
+  <br><ul><font size=-1>[The current (OMNEST 4.x) fingerprint is computed from the module
+  ID and simulation time of each event. This is likely to change in OMNEST
+  5.x, partly to make the fingerprint immune to module ID changes.]</font></ul>
+
+<p>Technically, providing a <b><tt>fingerprint</tt></b> option in the config file or
+on the command line (<tt>-fingerprint=...</tt>) will turn on fingerprint
+computation in the OMNEST simulation kernel. When the simulation
+terminates, OMNEST will compare the computed hash with the provided one,
+and if they differ, an error is generated.
+
+<p><ul class="warning"><b>WARNING</b><br>
+The computed fingerprint value is heavily dependent on the accuracy of the
+floating point arithmetic. There are differences between the floating point
+handling of AMD and Intel CPUs. Running under a processor emulator software
+like <tt>valgrind</tt> may also produce a different fingerprint. This is
+normal. Hint: see gcc options <tt>-mfpmath=sse -msse2</tt>.
+</ul>
+
+<p>The INET Framework contains a script for automated fingerprint tests as
+well. The script runs all or selected simulations defined in a CSV file
+(with columns like the working directory, the command to run, and the
+expected fingerprint), and reports the results. The script is extensively
+used during INET Framework development to detect regressions, and can be
+easily adapted to other models or model frameworks.
+
+<p>
+<h3><a name="sec475"/>15.3.3 Unit tests</h3>
+
+<p>If a simulation models contains units of code (classes, functions) smaller
+than a module, they are candidates for unit testing. For a network simulation
+model, examples of such classes are network addresses, fragmentation reassembly
+buffers, queues, various caches and tables, serializers and deserializers,
+checksum computation, etc.
+
+<p>Unit tests can be implemented as <tt>.test</tt> files using the <tt>opp_test</tt>
+tool (the <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%activity<font color=maroon><em>  </em>  </font> directive is especially useful here), or
+with potentially any other C++ unit testing framework.
+
+<p>When using <tt>.test</tt> files, the <i>build</i> part of the control script
+needs to be set up so that it adds the tested library's source folder(s)
+to the include path, and also links the library to the test code.
+
+<p>
+
+<p><h3><a name="sec476"/>15.3.4 Module tests</h3>
+
+<p>OMNEST modules are not as easy to unit test as standalone classes, because
+they typically assume a more complex environment, and, especially modules
+that implement network protocols, participate in more complex interactions
+than the latter.
+
+<p>To test a module in isolation, one needs to place it into a simulation
+where the module's normal operation environment (i.e. other modules it
+normally communicates with) are replaced by mock objects. Mock objects are
+responsible for providing stimuli for the module under test, and (partly)
+for checking the response.
+
+<p>Module tests may be implemented in <tt>.test</tt> files using the <tt>opp_test</tt>
+tool. A <tt>.test</tt> file allows you to place the test description, the test setup
+and the expected output into a single, compact file, while large files or files shared
+among several tests may be factored out and only referenced by <tt>.test</tt> files.
+
+<p>
+<h3><a name="sec477"/>15.3.5 Statistical tests</h3>
+
+<p>Statistical tests are those where the test outcome is decided on
+some statistical property or properties of the simulation results.
+
+<p>Statistical tests may be useful as validation as well as regression testing.
+
+<p><p class="subheading">Validation tests</p>
+
+<p>Validation tests aim to verify that simulation results correspond to some
+reference values, ideally to those obtained from the real system. In
+practice, reference values may come from physical measurements, theoretical
+values, or another simulator's results.
+
+<p><p class="subheading">Statistical regression tests</p>
+
+<p>After a refactoring that changes the simulation trajectory (e.g. after
+eliminating or introducing extra events, or changes in RNG usage), there
+may be no other way to do regression testing than checking that the model
+produces <i>statistically</i> the same results as before.
+
+<p>For statististical regression tests, one needs to perform several
+simulation runs with the same configuration but different RNG seeds, and
+verify that the results are from the same distributions as before. One can
+use <i>Student's t-test</i> (for mean) and the <i>F-test</i> (for
+variance) to check that the &#8220;before&#8221; and the &#8220;after&#8221; sets of results
+are from the same distribution.
+
+<p><p class="subheading">Implementation</p>
+
+<p>Statistical software like <i>GNU R</i> is extremely useful for these
+tests.
+
+<p>Statistical tests may also be implemented in <tt>.test</tt> files. To let the
+tool run several simulations within one test, one may use
+<font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%extraargs<font color=maroon><em>  </em>  </font> to pass the <tt>-r <i>&lt;runs&gt;</i></tt> option to Cmdenv;
+alternatively, one may use <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%testprog<font color=maroon><em>  </em>  </font> to have the test tool run
+<tt>opp_runall</tt> instead of the normal simulation program. For doing the
+statistical computations, one may use <font color=maroon><em> Unknown LaTeX command </em> \ftest </font>%postrun-command<font color=maroon><em>  </em>  </font> to run an R
+script. The R script may rely on the <tt>omnetpp</tt> R package for reading
+the result files.
+
+<p>The INET Framework contains statistical tests where you can look for
+inspiration.
+
+<p>
+
+<p>
+
+
+<hr class='pgbr'><p><hr><b><a href="chap14.html">[Prev]</A>&nbsp;<a href="chap16.html">[Next]</A>&nbsp;<a href="toc.html#toc_15.">[TOC]</a>&nbsp;<a href="usman.html">[Chapters]</a></b><hr></p>
+
+</body>
+</html>

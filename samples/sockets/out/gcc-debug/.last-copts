@@ -1,0 +1,1 @@
+-g -Wall -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT -DXMLPARSER=libxml -DWITH_PARSIM -DWITH_NETBUILDER -DAUTOIMPORT_NAMESPACE -I. -Ihtdocs -I/home/sxamyd/omnetpp-4.6/include

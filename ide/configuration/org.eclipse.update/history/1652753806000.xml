@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config transient="false" date="1417516075589">
+	<site enabled="true" updateable="true" policy="USER-EXCLUDE" url="platform:/base/">
+		<feature id="org.eclipse.gmf.runtime.thirdparty" url="features/org.eclipse.gmf.runtime.thirdparty_1.8.0.201406111639/" version="1.8.0.201406111639">
+		</feature>
+		<feature id="com.lowagie.itext" url="features/com.lowagie.itext_1.5.4.v20080225-1437w31191339/" version="1.5.4.v20080225-1437w31191339">
+		</feature>
+		<feature id="org.eclipse.cdt" url="features/org.eclipse.cdt_8.4.0.201406111759/" version="8.4.0.201406111759">
+		</feature>
+		<feature id="org.eclipse.emf.common" url="features/org.eclipse.emf.common_2.10.0.v20140514-1158/" version="2.10.0.v20140514-1158">
+		</feature>
+		<feature id="org.eclipse.linuxtools.valgrind" url="features/org.eclipse.linuxtools.valgrind_3.0.0.201406100404/" version="3.0.0.201406100404">
+		</feature>
+		<feature id="org.eclipse.gef" url="features/org.eclipse.gef_3.9.100.201405261516/" version="3.9.100.201405261516">
+		</feature>
+		<feature id="org.eclipse.draw2d" url="features/org.eclipse.draw2d_3.9.100.201405261516/" version="3.9.100.201405261516">
+		</feature>
+		<feature id="org.eclipse.equinox.p2.extras.feature" url="features/org.eclipse.equinox.p2.extras.feature_1.2.0.v20140523-0116/" version="1.2.0.v20140523-0116">
+		</feature>
+		<feature id="org.omnetpp.ide" url="features/org.omnetpp.ide_4.6.0.141202-f785492/" version="4.6.0.141202-f785492">
+		</feature>
+		<feature id="org.eclipse.cdt.platform" url="features/org.eclipse.cdt.platform_8.4.0.201406111759/" version="8.4.0.201406111759">
+		</feature>
+		<feature id="org.eclipse.cdt.gdb" url="features/org.eclipse.cdt.gdb_8.4.0.201406111759/" version="8.4.0.201406111759">
+		</feature>
+		<feature id="org.eclipse.emf.edit" url="features/org.eclipse.emf.edit_2.10.0.v20140519-0339/" version="2.10.0.v20140519-0339">
+		</feature>
+		<feature id="org.eclipse.egit" url="features/org.eclipse.egit_3.4.0.201406110918-r/" version="3.4.0.201406110918-r">
+		</feature>
+		<feature id="org.omnetpp.ide.academic" plugin-identifier="org.omnetpp.main" url="features/org.omnetpp.ide.academic_4.6.0.141202-f785492/" version="4.6.0.141202-f785492">
+		</feature>
+		<feature id="org.eclipse.ecf.filetransfer.feature" url="features/org.eclipse.ecf.filetransfer.feature_3.9.0.v20140528-1625/" version="3.9.0.v20140528-1625">
+		</feature>
+		<feature id="org.eclipse.ecf.filetransfer.httpclient4.ssl.feature" url="features/org.eclipse.ecf.filetransfer.httpclient4.ssl.feature_1.0.0.v20140528-1625/" version="1.0.0.v20140528-1625">
+		</feature>
+		<feature id="org.eclipse.cdt.native" url="features/org.eclipse.cdt.native_8.4.0.201406111759/" version="8.4.0.201406111759">
+		</feature>
+		<feature id="org.eclipse.equinox.p2.rcp.feature" url="features/org.eclipse.equinox.p2.rcp.feature_1.2.0.v20140523-0116/" version="1.2.0.v20140523-0116">
+		</feature>
+		<feature id="org.eclipse.ecf.core.ssl.feature" url="features/org.eclipse.ecf.core.ssl.feature_1.0.0.v20140528-1625/" version="1.0.0.v20140528-1625">
+		</feature>
+		<feature id="org.eclipse.e4.rcp" url="features/org.eclipse.e4.rcp_1.3.100.v20140606-1445/" version="1.3.100.v20140606-1445">
+		</feature>
+		<feature id="org.eclipse.emf.ecore" url="features/org.eclipse.emf.ecore_2.10.0.v20140514-1158/" version="2.10.0.v20140514-1158">
+		</feature>
+		<feature id="org.eclipse.cdt.gnu.dsf" url="features/org.eclipse.cdt.gnu.dsf_8.4.0.201406111759/" version="8.4.0.201406111759">
+		</feature>
+		<feature id="org.eclipse.cdt.gnu.debug" url="features/org.eclipse.cdt.gnu.debug_8.4.0.201406111759/" version="8.4.0.201406111759">
+		</feature>
+		<feature id="org.eclipse.equinox.p2.user.ui" url="features/org.eclipse.equinox.p2.user.ui_2.2.0.v20140523-0116/" version="2.2.0.v20140523-0116">
+		</feature>
+		<feature id="org.omnetpp.ide.source" url="features/org.omnetpp.ide.source_4.6.0.141202-f785492/" version="4.6.0.141202-f785492">
+		</feature>
+		<feature id="org.eclipse.emf.common.ui" url="features/org.eclipse.emf.common.ui_2.9.0.v20140519-0339/" version="2.9.0.v20140519-0339">
+		</feature>
+		<feature id="org.eclipse.epp.mpc" plugin-identifier="org.eclipse.epp.mpc.ui" url="features/org.eclipse.epp.mpc_1.3.0.v20140529-2031/" version="1.3.0.v20140529-2031">
+		</feature>
+		<feature id="org.eclipse.ecf.core.feature" url="features/org.eclipse.ecf.core.feature_1.1.0.v20140528-1625/" version="1.1.0.v20140528-1625">
+		</feature>
+		<feature id="de.unikassel.imageexport" url="features/de.unikassel.imageexport_0.11.0/" version="0.11.0">
+		</feature>
+		<feature id="org.eclipse.jgit" url="features/org.eclipse.jgit_3.4.0.201406110918-r/" version="3.4.0.201406110918-r">
+		</feature>
+		<feature id="org.eclipse.ecf.filetransfer.ssl.feature" url="features/org.eclipse.ecf.filetransfer.ssl.feature_1.0.0.v20140528-1625/" version="1.0.0.v20140528-1625">
+		</feature>
+		<feature id="org.eclipse.linuxtools.cdt.libhover.feature" url="features/org.eclipse.linuxtools.cdt.libhover.feature_1.0.0.201406100404/" version="1.0.0.201406100404">
+		</feature>
+		<feature id="org.eclipse.emf.ecore.edit" url="features/org.eclipse.emf.ecore.edit_2.9.0.v20140519-0339/" version="2.9.0.v20140519-0339">
+		</feature>
+		<feature id="org.eclipse.cdt.gnu.build" url="features/org.eclipse.cdt.gnu.build_8.4.0.201406111759/" version="8.4.0.201406111759">
+		</feature>
+		<feature id="org.eclipse.rcp" url="features/org.eclipse.rcp_4.4.0.v20140606-1445/" version="4.4.0.v20140606-1445">
+		</feature>
+		<feature id="org.eclipse.equinox.p2.discovery.feature" url="features/org.eclipse.equinox.p2.discovery.feature_1.0.200.v20140512-1802/" version="1.0.200.v20140512-1802">
+		</feature>
+		<feature id="org.eclipse.emf.edit.ui" url="features/org.eclipse.emf.edit.ui_2.10.0.v20140519-0339/" version="2.10.0.v20140519-0339">
+		</feature>
+		<feature id="org.eclipse.ecf.filetransfer.httpclient4.feature" url="features/org.eclipse.ecf.filetransfer.httpclient4.feature_3.8.1.v20140528-1625/" version="3.8.1.v20140528-1625">
+		</feature>
+		<feature id="org.eclipse.linuxtools.profiling" url="features/org.eclipse.linuxtools.profiling_2.0.0.201406100404/" version="2.0.0.201406100404">
+		</feature>
+		<feature id="org.eclipse.platform" url="features/org.eclipse.platform_4.4.0.v20140606-1558/" version="4.4.0.v20140606-1558">
+		</feature>
+		<feature id="org.eclipse.help" plugin-identifier="org.eclipse.help.base" url="features/org.eclipse.help_2.0.102.v20140606-1215/" version="2.0.102.v20140606-1215">
+		</feature>
+		<feature id="org.eclipse.equinox.p2.core.feature" url="features/org.eclipse.equinox.p2.core.feature_1.3.0.v20140523-0116/" version="1.3.0.v20140523-0116">
+		</feature>
+	</site>
+</config>

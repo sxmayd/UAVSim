@@ -1,0 +1,296 @@
+file 94755 1652760077                                           
+version 2
+run General-0-20220517-11:59:59-17689
+attr configname General
+attr datetime 20220517-11:59:59
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network UAVNet
+attr processid 17689
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+vector 5  UAVNet.host[0].wlan[0].mgmt  dataQueueLen:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "data queue length, vector"
+vector 25  UAVNet.host[1].wlan[0].mgmt  dataQueueLen:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "data queue length, vector"
+vector 50  UAVNet.host[2].wlan[0].mgmt  dataQueueLen:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "data queue length, vector"
+vector 75  UAVNet.host[3].wlan[0].mgmt  dataQueueLen:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "data queue length, vector"
+vector 100  UAVNet.host[4].wlan[0].mgmt  dataQueueLen:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "data queue length, vector"
+vector 111  UAVNet.host[0].wlan[0].mac  RadioState  ETV
+attr enum  "IDLE=0, OFF=4, RECV=1, SLEEP=3, TRANSMIT=2"
+attr enumname  RadioState
+vector 110  UAVNet.host[0].wlan[0].mac  State  ETV
+attr enum  "BACKOFF=3, DEFER=1, IDLE=0, RECEIVE=8, WAITACK=4, WAITAIFS=2, WAITCTS=6, WAITMULTICAST=5, WAITSIFS=7"
+attr enumname  Ieee80211Mac
+vector 117  UAVNet.host[1].wlan[0].mac  RadioState  ETV
+attr enum  "IDLE=0, OFF=4, RECV=1, SLEEP=3, TRANSMIT=2"
+attr enumname  RadioState
+vector 116  UAVNet.host[1].wlan[0].mac  State  ETV
+attr enum  "BACKOFF=3, DEFER=1, IDLE=0, RECEIVE=8, WAITACK=4, WAITAIFS=2, WAITCTS=6, WAITMULTICAST=5, WAITSIFS=7"
+attr enumname  Ieee80211Mac
+vector 123  UAVNet.host[2].wlan[0].mac  RadioState  ETV
+attr enum  "IDLE=0, OFF=4, RECV=1, SLEEP=3, TRANSMIT=2"
+attr enumname  RadioState
+vector 122  UAVNet.host[2].wlan[0].mac  State  ETV
+attr enum  "BACKOFF=3, DEFER=1, IDLE=0, RECEIVE=8, WAITACK=4, WAITAIFS=2, WAITCTS=6, WAITMULTICAST=5, WAITSIFS=7"
+attr enumname  Ieee80211Mac
+vector 129  UAVNet.host[3].wlan[0].mac  RadioState  ETV
+attr enum  "IDLE=0, OFF=4, RECV=1, SLEEP=3, TRANSMIT=2"
+attr enumname  RadioState
+vector 128  UAVNet.host[3].wlan[0].mac  State  ETV
+attr enum  "BACKOFF=3, DEFER=1, IDLE=0, RECEIVE=8, WAITACK=4, WAITAIFS=2, WAITCTS=6, WAITMULTICAST=5, WAITSIFS=7"
+attr enumname  Ieee80211Mac
+vector 135  UAVNet.host[4].wlan[0].mac  RadioState  ETV
+attr enum  "IDLE=0, OFF=4, RECV=1, SLEEP=3, TRANSMIT=2"
+attr enumname  RadioState
+vector 134  UAVNet.host[4].wlan[0].mac  State  ETV
+attr enum  "BACKOFF=3, DEFER=1, IDLE=0, RECEIVE=8, WAITACK=4, WAITAIFS=2, WAITCTS=6, WAITMULTICAST=5, WAITSIFS=7"
+attr enumname  Ieee80211Mac
+vector 11  UAVNet.host[0].wlan[0].radio  bitrate:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, vector"
+attr unit  bps
+vector 13  UAVNet.host[0].wlan[0].radio  radioState:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "radio state (enum), vector"
+vector 12  UAVNet.host[0].wlan[0].radio  channelNo:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "channel no, vector"
+vector 31  UAVNet.host[1].wlan[0].radio  bitrate:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, vector"
+attr unit  bps
+vector 33  UAVNet.host[1].wlan[0].radio  radioState:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "radio state (enum), vector"
+vector 32  UAVNet.host[1].wlan[0].radio  channelNo:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "channel no, vector"
+vector 56  UAVNet.host[2].wlan[0].radio  bitrate:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, vector"
+attr unit  bps
+vector 58  UAVNet.host[2].wlan[0].radio  radioState:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "radio state (enum), vector"
+vector 57  UAVNet.host[2].wlan[0].radio  channelNo:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "channel no, vector"
+vector 81  UAVNet.host[3].wlan[0].radio  bitrate:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, vector"
+attr unit  bps
+vector 83  UAVNet.host[3].wlan[0].radio  radioState:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "radio state (enum), vector"
+vector 82  UAVNet.host[3].wlan[0].radio  channelNo:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "channel no, vector"
+vector 106  UAVNet.host[4].wlan[0].radio  bitrate:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, vector"
+attr unit  bps
+vector 108  UAVNet.host[4].wlan[0].radio  radioState:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "radio state (enum), vector"
+vector 107  UAVNet.host[4].wlan[0].radio  channelNo:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "channel no, vector"
+vector 18  UAVNet.host[1].pingApp[0]  pingTxSeq:vector  ETV
+attr interpolationmode  none
+attr title  "ping tx seq, vector"
+vector 38  UAVNet.host[2].pingApp[0]  pingTxSeq:vector  ETV
+attr interpolationmode  none
+attr title  "ping tx seq, vector"
+vector 63  UAVNet.host[3].pingApp[0]  pingTxSeq:vector  ETV
+attr interpolationmode  none
+attr title  "ping tx seq, vector"
+vector 88  UAVNet.host[4].pingApp[0]  pingTxSeq:vector  ETV
+attr interpolationmode  none
+attr title  "ping tx seq, vector"
+vector 20  UAVNet.host[1].networkLayer.arp  sentReq:vector  ETV
+attr title  "ARP request sent, vector"
+vector 45  UAVNet.host[2].networkLayer.arp  sentReq:vector  ETV
+attr title  "ARP request sent, vector"
+vector 70  UAVNet.host[3].networkLayer.arp  sentReq:vector  ETV
+attr title  "ARP request sent, vector"
+vector 95  UAVNet.host[4].networkLayer.arp  sentReq:vector  ETV
+attr title  "ARP request sent, vector"
+vector 29  UAVNet.host[1].wlan[0].mac  rcvdPkFromHL:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetReceivedFromUpper
+attr title  "packets received from higher layer, vector(packetBytes)"
+vector 119  UAVNet.host[1].wlan[0].mac  "throughput AC0"  ETV
+vector 54  UAVNet.host[2].wlan[0].mac  rcvdPkFromHL:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetReceivedFromUpper
+attr title  "packets received from higher layer, vector(packetBytes)"
+vector 125  UAVNet.host[2].wlan[0].mac  "throughput AC0"  ETV
+vector 79  UAVNet.host[3].wlan[0].mac  rcvdPkFromHL:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetReceivedFromUpper
+attr title  "packets received from higher layer, vector(packetBytes)"
+vector 131  UAVNet.host[3].wlan[0].mac  "throughput AC0"  ETV
+vector 104  UAVNet.host[4].wlan[0].mac  rcvdPkFromHL:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetReceivedFromUpper
+attr title  "packets received from higher layer, vector(packetBytes)"
+vector 137  UAVNet.host[4].wlan[0].mac  "throughput AC0"  ETV
+vector 28  UAVNet.host[1].wlan[0].mac  sentDownPk:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetSentToLower
+attr title  "packets sent to lower layer, vector(packetBytes)"
+vector 53  UAVNet.host[2].wlan[0].mac  sentDownPk:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetSentToLower
+attr title  "packets sent to lower layer, vector(packetBytes)"
+vector 78  UAVNet.host[3].wlan[0].mac  sentDownPk:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetSentToLower
+attr title  "packets sent to lower layer, vector(packetBytes)"
+vector 103  UAVNet.host[4].wlan[0].mac  sentDownPk:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetSentToLower
+attr title  "packets sent to lower layer, vector(packetBytes)"
+vector 113  UAVNet.host[0].wlan[0].mac  "throughput AC0"  ETV
+vector 115  UAVNet.host[0].wlan[0].radio  snirVector  ETV
+vector 10  UAVNet.host[0].wlan[0].mac  rcvdPkFromLL:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, vector(packetBytes)"
+vector 43  UAVNet.host[2].pingApp[1]  pingTxSeq:vector  ETV
+attr interpolationmode  none
+attr title  "ping tx seq, vector"
+vector 68  UAVNet.host[3].pingApp[1]  pingTxSeq:vector  ETV
+attr interpolationmode  none
+attr title  "ping tx seq, vector"
+vector 93  UAVNet.host[4].pingApp[1]  pingTxSeq:vector  ETV
+attr interpolationmode  none
+attr title  "ping tx seq, vector"
+vector 7  UAVNet.host[0].wlan[0].mac  passedUpPk:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, vector(packetBytes)"
+vector 127  UAVNet.host[2].wlan[0].radio  snirVector  ETV
+vector 55  UAVNet.host[2].wlan[0].mac  rcvdPkFromLL:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, vector(packetBytes)"
+vector 52  UAVNet.host[2].wlan[0].mac  passedUpPk:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, vector(packetBytes)"
+vector 133  UAVNet.host[3].wlan[0].radio  snirVector  ETV
+vector 80  UAVNet.host[3].wlan[0].mac  rcvdPkFromLL:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, vector(packetBytes)"
+vector 77  UAVNet.host[3].wlan[0].mac  passedUpPk:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, vector(packetBytes)"
+vector 121  UAVNet.host[1].wlan[0].radio  snirVector  ETV
+vector 30  UAVNet.host[1].wlan[0].mac  rcvdPkFromLL:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, vector(packetBytes)"
+vector 27  UAVNet.host[1].wlan[0].mac  passedUpPk:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, vector(packetBytes)"
+vector 21  UAVNet.host[1].networkLayer.arp  sentReply:vector  ETV
+attr title  "ARP replies sent, vector"
+vector 139  UAVNet.host[4].wlan[0].radio  snirVector  ETV
+vector 105  UAVNet.host[4].wlan[0].mac  rcvdPkFromLL:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, vector(packetBytes)"
+vector 102  UAVNet.host[4].wlan[0].mac  passedUpPk:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, vector(packetBytes)"
+5	10507 8 0 0 0 0 1 0 0 0 0
+7	10515 51 995 1080 20.001637875256 20.003272231496 2 70 70 140 9800
+10	10566 988 68 1555 10.000781440283 20.015506944835 37 14 118 2214 174676
+11	11554 15 0 0 0 0 1 2000000 2000000 2000000 4000000000000
+12	11569 9 0 0 0 0 1 0 0 0 0
+13	11578 1926 0 1560 0 20.01551966019 76 0 1 38 38
+18	13504 131 11 889 10 20 11 0 10 55 385
+20	13635 130 19 893 10 20 11 1 1 11 11
+21	13765 77 1013 1126 20.001640430608 20.004064203024 3 1 1 3 3
+25	13842 86 0 1519 0 20.01499721728 4 0 2 4 6
+27	13928 108 1010 1194 20.001640430608 20.005731633632 4 70 118 328 28624
+28	14036 540 35 1534 10.000028 20.015029647888 23 14 70 1386 93884
+29	14576 221 31 1520 10 20.01499721728 14 70 70 980 68600
+30	14797 379 1010 1531 20.001640430608 20.015001647888 14 14 118 780 71768
+31	15176 15 0 0 0 0 1 2000000 2000000 2000000 4000000000000
+32	15191 9 0 0 0 0 1 0 0 0 0
+33	15200 2053 0 1561 0 20.015520634604 87 0 2 72 118
+38	17253 131 12 890 10 20 11 0 10 55 385
+43	17384 12 886 886 20 20 1 0 0 0 0
+45	17396 142 20 908 10 20 12 1 1 12 12
+50	17538 9 0 0 0 0 1 0 0 0 0
+52	17547 54 1000 1548 20.001639281944 20.015506141246 2 70 70 140 9800
+53	17601 273 36 1557 10.000028 20.015516141246 13 14 70 854 58996
+54	17874 183 32 1553 10 20.015506141246 13 70 118 958 72724
+55	18057 676 1000 1548 20.001639281944 20.015506141246 25 14 118 1374 115876
+56	18733 15 0 0 0 0 1 2000000 2000000 2000000 4000000000000
+57	18748 9 0 0 0 0 1 0 0 0 0
+58	18757 2055 0 1558 0 20.015516141246 87 0 2 62 88
+63	20812 131 13 891 10 20 11 0 10 55 385
+68	20943 12 887 887 20 20 1 0 0 0 0
+70	20955 142 21 909 10 20 12 1 1 12 12
+75	21097 9 0 0 0 0 1 0 0 0 0
+77	21106 54 1005 1093 20.001639429995 20.003273389986 2 70 70 140 9800
+78	21160 246 37 1103 10.000028 20.003310389986 12 70 70 840 58800
+79	21406 155 33 930 10 20 12 70 70 840 58800
+80	21561 677 1005 1542 20.001639429995 20.015503460926 25 14 118 1326 106852
+81	22238 15 0 0 0 0 1 2000000 2000000 2000000 4000000000000
+82	22253 9 0 0 0 0 1 0 0 0 0
+83	22262 2060 0 1562 0 20.01552081868 87 0 2 61 85
+88	24322 131 14 892 10 20 11 0 10 55 385
+93	24453 12 888 888 20 20 1 0 0 0 0
+95	24465 142 22 910 10 20 12 1 1 12 12
+100	24607 10 0 0 0 0 1 0 0 0 0
+102	24617 56 1031 1075 20.002144645912 20.003271779192 2 70 70 140 9800
+103	24673 597 38 1512 10.000028 20.014693432584 24 14 118 1528 129792
+104	25270 196 34 1036 10 20.002144645912 13 70 118 958 72724
+105	25466 363 1031 1545 20.002144645912 20.015505863192 13 14 70 686 44884
+106	25829 16 0 0 0 0 1 2000000 2000000 2000000 4000000000000
+107	25845 10 0 0 0 0 1 0 0 0 0
+108	25855 2174 0 1559 0 20.015519207886 88 0 2 74 122
+110	28029 7262 0 1560 0 20.01551966019 274 0 0 0 0
+111	35291 4004 0 1560 0 20.01551966019 152 0 1 75 75
+113	39295 285 43 940 10.000029440283 20.000029659952 11 0 0 0 0
+115	39580 42 67 67 10.000781440283 10.000781440283 1 -0.080335176492429 -0.080335176492429 -0.080335176492429 0.0064537405820696
+116	39622 9128 0 1564 0 20.015819647888 380 0 7 967 3451
+117	48750 4280 0 1561 0 20.015520634604 174 0 2 143 235
+119	53030 162 31 922 10 20 11 0 560 5600 3136000
+121	53192 41 1009 1009 20.001640430608 20.001640430608 1 57.914999119334 57.914999119334 57.914999119334 3354.1471229925
+122	53233 9406 0 1558 0 20.015516141246 390 0 7 515 1843
+123	62639 4284 0 1558 0 20.015516141246 174 0 2 122 172
+125	66923 162 32 923 10 20 11 0 560 5600 3136000
+127	67085 40 999 999 20.001639281944 20.001639281944 1 60.678319683862 60.678319683862 60.678319683862 3681.858479657
+128	67125 9536 0 1563 0 20.015817460926 394 0 5 510 1770
+129	76661 4294 0 1562 0 20.01552081868 174 0 2 121 169
+131	80955 162 33 924 10 20 11 0 560 5600 3136000
+133	81117 41 1004 1004 20.001639429995 20.001639429995 1 60.268792002481 60.268792002481 60.268792002481 3632.3272894383
+134	81158 9046 0 1559 0 20.015519207886 376 0 7 961 3521
+135	90204 4348 0 1559 0 20.015519207886 176 0 2 147 243
+137	94552 162 34 925 10 20 11 0 560 5600 3136000
+139	94714 41 1030 1030 20.002144645912 20.002144645912 1 57.914999117863 57.914999117863 57.914999117863 3354.147122822

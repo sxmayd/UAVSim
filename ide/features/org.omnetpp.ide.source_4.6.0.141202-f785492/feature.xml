@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature id="org.omnetpp.ide.source" version="4.6.0.141202-f785492" label="OMNeT++ IDE - Base Features" provider-name="OpenSim Ltd."  os="linux,macosx,win32" arch="x86,x86_64" ws="cocoa,gtk,win32" >
+	<plugin id="org.apache.commons.codec.source" version="1.6.0.v201305230611"     unpack="false"/>
+	<plugin id="org.apache.commons.logging.source" version="1.1.1.v201101211721"     unpack="false"/>
+	<plugin id="org.omnetpp.common.source" version="4.6.0.141202-f785492"     unpack="false"/>
+	<plugin id="org.omnetpp.eventlogtable.source" version="4.6.0.141202-f785492"     unpack="false"/>
+	<plugin id="org.omnetpp.figures.source" version="4.6.0.141202-f785492"     unpack="false"/>
+	<plugin id="org.omnetpp.ide.nativelibs.source" version="4.6.0.141202-f785492"     unpack="false"/>
+	<plugin id="org.omnetpp.inifile.editor.source" version="4.6.0.141202-f785492"     unpack="false"/>
+	<plugin id="org.omnetpp.main.source" version="4.6.0.141202-f785492"     unpack="false"/>
+	<plugin id="org.omnetpp.ned.core.source" version="4.6.0.141202-f785492"     unpack="false"/>
+	<plugin id="org.omnetpp.ned.editor.source" version="4.6.0.141202-f785492"     unpack="false"/>
+	<plugin id="org.omnetpp.ned.model.source" version="4.6.0.141202-f785492"     unpack="false"/>
+	<plugin id="org.omnetpp.scave.source" version="4.6.0.141202-f785492"     unpack="false"/>
+	<plugin id="org.omnetpp.scave.builder.source" version="4.6.0.141202-f785492"     unpack="false"/>
+	<plugin id="org.omnetpp.scave.model.source" version="4.6.0.141202-f785492"     unpack="false"/>
+	<plugin id="org.omnetpp.sequencechart.source" version="4.6.0.141202-f785492"     unpack="false"/>
+	<plugin id="org.omnetpp.launch.source" version="4.6.0.141202-f785492"     unpack="false"/>
+	<plugin id="org.omnetpp.msg.editor.source" version="4.6.0.141202-f785492"     unpack="false"/>
+	<plugin id="org.omnetpp.cdt.source" version="4.6.0.141202-f785492"     unpack="false"/>
+	<plugin id="org.omnetpp.neddoc.source" version="4.6.0.141202-f785492"     unpack="false"/>
+	<plugin id="org.omnetpp.common.core.source" version="4.6.0.141202-f785492"     unpack="false"/>
+	<plugin id="org.visigoths.freemarker.source" version="2.3.15"     unpack="false"/>
+	<plugin id="org.visigoths.freemarker.ide.source" version="0.3.1.omnetpp"     unpack="false"/>
+	<plugin id="org.swtworkbench.xswt.source" version="1.1.2"     unpack="false"/>
+	<plugin id="org.eclipse.gmf.runtime.common.core.source" version="1.7.0.201406111639"     unpack="false"/>
+	<plugin id="org.eclipse.gmf.runtime.common.ui.source" version="1.7.0.201406111639"     unpack="false"/>
+	<plugin id="org.eclipse.gmf.runtime.draw2d.ui.source" version="1.8.0.201406111639"     unpack="false"/>
+	<plugin id="org.eclipse.gmf.runtime.draw2d.ui.render.source" version="1.7.0.201406111639"     unpack="false"/>
+	<plugin id="org.eclipse.gmf.runtime.draw2d.ui.render.awt.source" version="1.8.0.201406111639"     unpack="false"/>
+	<plugin id="org.apache.httpcomponents.httpclient.source" version="4.2.6.v201311072007"     unpack="false"/>
+</feature>

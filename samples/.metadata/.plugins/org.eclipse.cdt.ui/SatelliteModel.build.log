@@ -1,0 +1,5 @@
+11:04:17 **** Incremental Build of configuration gcc-debug for project SatelliteModel ****
+make MODE=debug CONFIGNAME=gcc-debug all 
+
+11:04:17 Build Finished (took 326ms)
+

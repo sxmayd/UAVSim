@@ -1,0 +1,25 @@
+11:07:31 **** Incremental Build of configuration gcc-debug for project inet ****
+make MODE=debug CONFIGNAME=gcc-debug -j8 all 
+cd src && make
+make[1]: Entering directory '/home/sxamyd/omnetpp-4.6/samples/uavsim/samples/inet/src'
+make[1]: Leaving directory '/home/sxamyd/omnetpp-4.6/samples/uavsim/samples/inet/src'
+11:07:37 **** Incremental Build of configuration gcc-debug for project CNI_OS3 ****
+make MODE=debug CONFIGNAME=gcc-debug all 
+cd src && make all
+make[1]: Entering directory '/home/sxamyd/omnetpp-4.6/samples/uavsim/samples/CNI_OS3/src'
+make[1]: Leaving directory '/home/sxamyd/omnetpp-4.6/samples/uavsim/samples/CNI_OS3/src'
+Creating shared library: out/gcc-debug//libCNI_OS3.so
+11:07:44 **** Incremental Build of configuration gcc-debug for project GPSAttackApp ****
+make MODE=debug CONFIGNAME=gcc-debug all 
+cd src && make all
+make[1]: Entering directory '/home/sxamyd/omnetpp-4.6/samples/uavsim/samples/GPSAttackApp/src'
+make[1]: Leaving directory '/home/sxamyd/omnetpp-4.6/samples/uavsim/samples/GPSAttackApp/src'
+Creating executable: out/gcc-debug//GPSAttackApp
+11:07:50 **** Incremental Build of configuration gcc-debug for project GPSApp ****
+make MODE=debug CONFIGNAME=gcc-debug all 
+cd src && make all
+make[1]: Entering directory '/home/sxamyd/omnetpp-4.6/samples/uavsim/samples/GPSApp/src'
+make[1]: Leaving directory '/home/sxamyd/omnetpp-4.6/samples/uavsim/samples/GPSApp/src'
+Creating executable: out/gcc-debug//GPSApp
+11:07:57 **** Incremental Build of configuration gcc-debug for project UAVModels ****
+make MODE=debug CONFIGNAME=gcc-debug all 

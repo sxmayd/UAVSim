@@ -1,0 +1,5 @@
+11:03:34 **** Build of configuration gcc-debug for project GPSSimulation ****
+make MODE=debug CONFIGNAME=gcc-debug all 
+
+11:03:34 Build Finished (took 328ms)
+
