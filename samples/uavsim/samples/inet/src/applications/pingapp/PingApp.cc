@@ -257,18 +257,19 @@ void PingApp::processPingResponse(PingPayload *msg)
         return;
     }
 
-    int timeLength = msg->getDataArraySize();
-    char time[timeLength + 1];
-    for (int i = 0; i < timeLength; i++)
-        time[i] = msg->getData(i);
-    time[timeLength] = '\0';
-    simtime_t sendTime = STR_SIMTIME(time);     // Why converting to/from string?
-
-    if (sendTime < lastStart) {
-        EV << "Received response was not sent since last application start, dropping packet\n";
-        delete msg;
-        return;
-    }
+//    int timeLength = msg->getDataArraySize();
+//    char time[timeLength + 1];
+//    for (int i = 0; i < timeLength; i++)
+//        time[i] = msg->getData(i);
+//    time[timeLength] = '\0';
+//    simtime_t sendTime;
+//    if(timeLength != 0) sendTime = STR_SIMTIME(time);     // Why converting to/from string?
+//
+//    if (sendTime < lastStart) {
+//        EV << "Received response was not sent since last application start, dropping packet\n";
+//        delete msg;
+//        return;
+//    }
 
     // get src, hopCount etc from packet, and print them
     IPvXAddress src, dest;

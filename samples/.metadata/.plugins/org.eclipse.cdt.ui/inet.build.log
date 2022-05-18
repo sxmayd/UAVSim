@@ -1,8 +1,93 @@
-11:07:31 **** Incremental Build of configuration gcc-debug for project inet ****
+17:43:55 **** Incremental Build of configuration gcc-debug for project inet ****
 make MODE=debug CONFIGNAME=gcc-debug -j8 all 
 cd src && make
 make[1]: Entering directory '/home/sxamyd/omnetpp-4.6/samples/uavsim/samples/inet/src'
+applications/pingapp/PingApp.cc
+In file included from /home/sxamyd/omnetpp-4.6/include/simtime_t.h:24:0,
+                 from /home/sxamyd/omnetpp-4.6/include/cexception.h:26,
+                 from /home/sxamyd/omnetpp-4.6/include/cnamedobject.h:26,
+                 from /home/sxamyd/omnetpp-4.6/include/cownedobject.h:25,
+                 from /home/sxamyd/omnetpp-4.6/include/carray.h:23,
+                 from /home/sxamyd/omnetpp-4.6/include/omnetpp.h:21,
+                 from base/INETDefs.h:25,
+                 from applications/pingapp/PingApp.h:19,
+                 from applications/pingapp/PingApp.cc:21:
+/home/sxamyd/omnetpp-4.6/include/simtime.h:60:15: warning: ‘SimTime::SCALEEXP_S’ is deprecated [-Wdeprecated-declarations]
+ class SIM_API SimTime
+               ^
+/home/sxamyd/omnetpp-4.6/include/simtime.h:107:37: note: declared here
+     _OPPDEPRECATED static const int SCALEEXP_S;
+                                     ^
+/home/sxamyd/omnetpp-4.6/include/simtime.h:60:15: warning: ‘SimTime::SCALEEXP_MS’ is deprecated [-Wdeprecated-declarations]
+ class SIM_API SimTime
+               ^
+/home/sxamyd/omnetpp-4.6/include/simtime.h:108:37: note: declared here
+     _OPPDEPRECATED static const int SCALEEXP_MS;
+                                     ^
+/home/sxamyd/omnetpp-4.6/include/simtime.h:60:15: warning: ‘SimTime::SCALEEXP_US’ is deprecated [-Wdeprecated-declarations]
+ class SIM_API SimTime
+               ^
+/home/sxamyd/omnetpp-4.6/include/simtime.h:109:37: note: declared here
+     _OPPDEPRECATED static const int SCALEEXP_US;
+                                     ^
+/home/sxamyd/omnetpp-4.6/include/simtime.h:60:15: warning: ‘SimTime::SCALEEXP_NS’ is deprecated [-Wdeprecated-declarations]
+ class SIM_API SimTime
+               ^
+/home/sxamyd/omnetpp-4.6/include/simtime.h:110:37: note: declared here
+     _OPPDEPRECATED static const int SCALEEXP_NS;
+                                     ^
+/home/sxamyd/omnetpp-4.6/include/simtime.h:60:15: warning: ‘SimTime::SCALEEXP_PS’ is deprecated [-Wdeprecated-declarations]
+ class SIM_API SimTime
+               ^
+/home/sxamyd/omnetpp-4.6/include/simtime.h:111:37: note: declared here
+     _OPPDEPRECATED static const int SCALEEXP_PS;
+                                     ^
+/home/sxamyd/omnetpp-4.6/include/simtime.h:60:15: warning: ‘SimTime::SCALEEXP_FS’ is deprecated [-Wdeprecated-declarations]
+ class SIM_API SimTime
+               ^
+/home/sxamyd/omnetpp-4.6/include/simtime.h:112:37: note: declared here
+     _OPPDEPRECATED static const int SCALEEXP_FS;
+                                     ^
+In file included from /home/sxamyd/omnetpp-4.6/include/omnetpp.h:50:0,
+                 from base/INETDefs.h:25,
+                 from applications/pingapp/PingApp.h:19,
+                 from applications/pingapp/PingApp.cc:21:
+/home/sxamyd/omnetpp-4.6/include/clinkedlist.h:82:56: warning: ‘cLinkedList’ is deprecated [-Wdeprecated-declarations]
+         Iterator(const cLinkedList& q, bool athead=true)
+                                                        ^
+/home/sxamyd/omnetpp-4.6/include/clinkedlist.h:88:57: warning: ‘cLinkedList’ is deprecated [-Wdeprecated-declarations]
+         void init(const cLinkedList& q, bool athead=true)
+                                                         ^
+/home/sxamyd/omnetpp-4.6/include/clinkedlist.h:127:39: warning: ‘cLinkedList’ is deprecated [-Wdeprecated-declarations]
+     void copy(const cLinkedList& other);
+                                       ^
+/home/sxamyd/omnetpp-4.6/include/clinkedlist.h:154:41: warning: ‘cLinkedList’ is deprecated [-Wdeprecated-declarations]
+     cLinkedList(const cLinkedList& llist);
+                                         ^
+/home/sxamyd/omnetpp-4.6/include/clinkedlist.h:173:52: warning: ‘cLinkedList’ is deprecated [-Wdeprecated-declarations]
+     cLinkedList& operator=(const cLinkedList& queue);
+                                                    ^
+/home/sxamyd/omnetpp-4.6/include/clinkedlist.h:54:38: note: declared here
+ class SIM_API CLINKEDLIST_DEPRECATED cLinkedList : public cOwnedObject
+                                      ^
+/home/sxamyd/omnetpp-4.6/include/clinkedlist.h:173:52: warning: ‘cLinkedList’ is deprecated [-Wdeprecated-declarations]
+     cLinkedList& operator=(const cLinkedList& queue);
+                                                    ^
+/home/sxamyd/omnetpp-4.6/include/clinkedlist.h:184:32: warning: ‘cLinkedList’ is deprecated [-Wdeprecated-declarations]
+     virtual cLinkedList *dup() const  {return new cLinkedList(*this);}
+                                ^
+/home/sxamyd/omnetpp-4.6/include/clinkedlist.h:54:38: note: declared here
+ class SIM_API CLINKEDLIST_DEPRECATED cLinkedList : public cOwnedObject
+                                      ^
+/home/sxamyd/omnetpp-4.6/include/clinkedlist.h: In member function ‘virtual cLinkedList* cLinkedList::dup() const’:
+/home/sxamyd/omnetpp-4.6/include/clinkedlist.h:184:51: warning: ‘cLinkedList’ is deprecated [-Wdeprecated-declarations]
+     virtual cLinkedList *dup() const  {return new cLinkedList(*this);}
+                                                   ^
+/home/sxamyd/omnetpp-4.6/include/clinkedlist.h:54:38: note: declared here
+ class SIM_API CLINKEDLIST_DEPRECATED cLinkedList : public cOwnedObject
+                                      ^
+Creating shared library: ../out/gcc-debug/src/libinet.so
 make[1]: Leaving directory '/home/sxamyd/omnetpp-4.6/samples/uavsim/samples/inet/src'
 
-11:07:31 Build Finished (took 377ms)
+17:44:00 Build Finished (took 4s.981ms)
 

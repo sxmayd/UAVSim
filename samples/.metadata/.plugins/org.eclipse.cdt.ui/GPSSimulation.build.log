@@ -1,5 +1,6 @@
-11:03:34 **** Build of configuration gcc-debug for project GPSSimulation ****
-make MODE=debug CONFIGNAME=gcc-debug all 
+17:29:29 **** Clean-only build of configuration gcc-debug for project GPSSimulation ****
+make MODE=debug CONFIGNAME=gcc-debug clean 
+Cleaning...
 
-11:03:34 Build Finished (took 328ms)
+17:29:29 Build Finished (took 345ms)
 

@@ -1,5 +1,6 @@
-11:04:17 **** Incremental Build of configuration gcc-debug for project SatelliteModel ****
-make MODE=debug CONFIGNAME=gcc-debug all 
+17:29:34 **** Clean-only build of configuration gcc-debug for project SatelliteModel ****
+make MODE=debug CONFIGNAME=gcc-debug clean 
+Cleaning...
 
-11:04:17 Build Finished (took 326ms)
+17:29:35 Build Finished (took 347ms)
 

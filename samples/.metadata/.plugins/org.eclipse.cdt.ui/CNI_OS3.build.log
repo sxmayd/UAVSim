@@ -1,9 +1,9 @@
-11:07:37 **** Incremental Build of configuration gcc-debug for project CNI_OS3 ****
+17:44:06 **** Incremental Build of configuration gcc-debug for project CNI_OS3 ****
 make MODE=debug CONFIGNAME=gcc-debug all 
 cd src && make all
 make[1]: Entering directory '/home/sxamyd/omnetpp-4.6/samples/uavsim/samples/CNI_OS3/src'
 make[1]: Leaving directory '/home/sxamyd/omnetpp-4.6/samples/uavsim/samples/CNI_OS3/src'
 Creating shared library: out/gcc-debug//libCNI_OS3.so
 
-11:07:38 Build Finished (took 585ms)
+17:44:07 Build Finished (took 593ms)
 

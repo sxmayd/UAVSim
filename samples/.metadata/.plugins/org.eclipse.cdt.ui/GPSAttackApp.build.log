@@ -1,9 +1,9 @@
-11:07:44 **** Incremental Build of configuration gcc-debug for project GPSAttackApp ****
+17:44:12 **** Incremental Build of configuration gcc-debug for project GPSAttackApp ****
 make MODE=debug CONFIGNAME=gcc-debug all 
 cd src && make all
 make[1]: Entering directory '/home/sxamyd/omnetpp-4.6/samples/uavsim/samples/GPSAttackApp/src'
 make[1]: Leaving directory '/home/sxamyd/omnetpp-4.6/samples/uavsim/samples/GPSAttackApp/src'
 Creating executable: out/gcc-debug//GPSAttackApp
 
-11:07:44 Build Finished (took 683ms)
+17:44:13 Build Finished (took 696ms)
 

@@ -1,4 +1,4 @@
 # Partial OMNeT++/Tkenv config file -- see $HOME/.tkenvrc as well
-config default-configname	{Ping2}
+config default-configname	{General}
 config default-runnumber	{0}
 
